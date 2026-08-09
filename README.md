@@ -35,27 +35,9 @@ kdna load ./demo-judgment.kdna --profile=compact --as=json
 The workspace attachment commands (`attach`, `attachments`, `resolve`,
 `disable`, `enable`, `switch`, `rollback`, `remove`) are shipped in the
 published CLI, but they remain engineering foundation primitives
-rather than a stable product API. To evaluate them without confusing an exact
-candidate with an installed release, obtain an exact candidate commit from a
-machine-readable source receipt, detach at that immutable commit, verify the
-recorded HEAD, install its locked dependencies, and invoke the source entry
-point directly:
+rather than a stable product API.
 
-```bash
-git clone https://github.com/aikdna/kdna-cli.git kdna-cli-candidate
-cd kdna-cli-candidate
-git fetch origin <exact-commit-from-candidate-receipt>
-git switch --detach <exact-commit-from-candidate-receipt>
-git rev-parse HEAD
-npm ci
-node ./src/cli.js --version
-```
-
-Alternatively, an evaluator may use a candidate package supplied with an exact
-SHA-256 receipt; its digest must be verified before installation. Neither path
-changes what npm `latest` promises.
-
-To approve one exact file for one workspace from that detached source candidate
+To approve one exact file for one workspace
 and resolve a task without writing its text to disk, use:
 
 ```bash
@@ -384,6 +366,29 @@ published `0.36.0` package makes a deliberate safety correction:
 `license activate` rejects raw credentials supplied through `--key` or
 `--license-key`. Use browser activation, an external grant, or bounded
 `--credential-stdin`; never place a license credential in shell arguments.
+
+## Status
+
+The registry `latest` release is `0.36.1`. The workspace attachment commands are
+engineering foundation primitives rather than a stable product API. To evaluate
+them without confusing an exact candidate with an installed release, obtain an
+exact candidate commit from a machine-readable source receipt, detach at that immutable commit, verify the
+recorded HEAD, install its locked dependencies,
+and invoke the source entry point directly:
+
+```bash
+git clone https://github.com/aikdna/kdna-cli.git kdna-cli-candidate
+cd kdna-cli-candidate
+git fetch origin <exact-commit-from-candidate-receipt>
+git switch --detach <exact-commit-from-candidate-receipt>
+git rev-parse HEAD
+npm ci
+node ./src/cli.js --version
+```
+
+Alternatively, an evaluator may use a candidate package supplied with an exact
+SHA-256 receipt; its digest must be verified before installation. Neither path
+changes what npm `latest` promises.
 
 ## License
 
