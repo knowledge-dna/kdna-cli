@@ -390,6 +390,14 @@ Alternatively, an evaluator may use a candidate package supplied with an exact
 SHA-256 receipt; its digest must be verified before installation. Neither path
 changes what npm `latest` promises.
 
+
+## Official packages
+
+Official KDNA packages are published under the `@aikdna` npm scope and the
+`aikdna` name on PyPI. The unscoped npm package `kdna` is not affiliated with
+the KDNA project. Install only from the official coordinates shown in this
+README.
+
 ## License
 
 Apache-2.0
