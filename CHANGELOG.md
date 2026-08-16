@@ -157,8 +157,7 @@
 - Describe current CLI paths as pre-release rather than assigning Beta
   maturity.
 
-This is an unpublished Development Preview candidate. No existing registry
-version or package bytes are changed.
+Superseded by the published `0.36.0` (2026-08-02) entry above.
 
 ## 0.35.1 (2026-07-19)
 
