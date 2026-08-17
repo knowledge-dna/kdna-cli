@@ -14,7 +14,7 @@ const {
 const CORE_PACKAGE_NAME = '@aikdna/kdna-core';
 const REQUIRED_CORE_VERSION = CORE_CANDIDATE_VERSION;
 const CBOR_PACKAGE_NAME = 'cbor-x';
-const REQUIRED_CBOR_VERSION = '1.6.4';
+const REQUIRED_CBOR_VERSION = '1.6.5';
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
