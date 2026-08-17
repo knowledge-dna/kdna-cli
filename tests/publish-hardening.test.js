@@ -45,7 +45,7 @@ const {
 
 const ROOT = path.resolve(__dirname, '..');
 const HASH = 'a'.repeat(40);
-const CHECKOUT_V7_SHA = ['9c091bb21b7c1c1d1991b', 'b908d89e4e9dddfe3e0'].join('');
+const CHECKOUT_V7_SHA = ['3d3c42e5aac5ba805825da7', '6410c181273ba90b1'].join('');
 const SETUP_NODE_V6_SHA = ['249970729cb0ef3589644e', '2896645e5dc5ba9c38'].join('');
 
 function releaseInput(overrides = {}) {

@@ -6,32 +6,32 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const CHECKOUT_SHA = ['9c091bb21b7c1c1d1991b', 'b908d89e4e9dddfe3e0'].join('');
+const CHECKOUT_SHA = ['3d3c42e5aac5ba805825da7', '6410c181273ba90b1'].join('');
 const SETUP_NODE_SHA = ['249970729cb0ef3589644e', '2896645e5dc5ba9c38'].join('');
-const CODEQL_SHA = ['99df26d4f13ea111d4ec1', 'a7dddef6063f76b97e9'].join('');
-const STALE_SHA = ['1e223db275d687790206a7', 'acac4d1a11bd6fe629'].join('');
+const CODEQL_SHA = ['ff2f1c621b7f889edc0d3c7', '61ac2e6a3f8cdb0dd'].join('');
+const STALE_SHA = ['4391f3da665fdf50b6810c1a6', '6712fb9ba21aa93'].join('');
 const CORE_COMMIT = ['32aa3ff8e633291d4bb9e0', '1de5a70181c8415d93'].join('');
 
 const WORKFLOW_AUTHORITIES = Object.freeze([
   Object.freeze({
     path: '.github/workflows/ci.yml',
-    sha256: '147cc45a2c91a703ef80dd5a11a37ddc544dd6922d13dee3b437f143c8097f2b',
+    sha256: '793725e7f696a8d091f7632bd3245edcdec0b627de05366064238c467af2e9dd',
   }),
   Object.freeze({
     path: '.github/workflows/public-surface.yml',
-    sha256: 'ef0c2c6a37ff94130f98bb9535b01779cdc838081370a8c039da7c2a19a1fd9f',
+    sha256: '082db09457d8b97f7ea8c758ed708093c4e91b8d8c11b80b219cd586cd766863',
   }),
   Object.freeze({
     path: '.github/workflows/codeql-js.yml',
-    sha256: 'c17ff9a889a246ee0566a928b3c430ad1ddaebfaad8a95b9c28d01be30d5a030',
+    sha256: '90cfbebd93d00381ac48f8d9d8d8956f1fd9f0c03c022e037dbb61abc936a34d',
   }),
   Object.freeze({
     path: '.github/workflows/stale.yml',
-    sha256: '6c651ced1379089e0310af69eaae074984923fe6319ef2af31bbfb0bbabe70c4',
+    sha256: 'a1ad24f80a94d47d91bbc363021c7b714b97f66db6c37d8c07ac2b0d1493841e',
   }),
   Object.freeze({
     path: '.github/workflows/publish.yml',
-    sha256: '1bb3ba51c5496972e84c575c57beab7b057640f640b206c993451ec0c1abf3ad',
+    sha256: '8f7837c9f1a25168371f764319946f4705f83cbac3f34f0d8c268cd3b369ed49',
   }),
 ]);
 
