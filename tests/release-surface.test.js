@@ -125,7 +125,7 @@ test('package manifest has one bin and no evaluation dependency', () => {
   assert.deepEqual(manifest.bin, { kdna: 'src/cli.js' });
   assert.deepEqual(manifest.dependencies, {
     '@aikdna/kdna-core': '0.21.0',
-    'cbor-x': '1.6.4',
+    'cbor-x': '1.6.5',
   });
   assert.equal(manifest.optionalDependencies, undefined);
 });
