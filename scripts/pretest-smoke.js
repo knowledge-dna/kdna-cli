@@ -66,8 +66,8 @@ check('installed cbor-x version exactly matches declared version', () => {
   const cborPath = require.resolve('cbor-x/package.json');
   const installed = require(cborPath).version;
   const declared = require('../package.json').dependencies['cbor-x'];
-  if (declared !== '1.6.4') {
-    throw new Error(`declared CBOR dependency must be exactly 1.6.4: ${String(declared)}`);
+  if (declared !== '1.6.5') {
+    throw new Error(`declared CBOR dependency must be exactly 1.6.5: ${String(declared)}`);
   }
   if (installed !== declared) {
     throw new Error(`exact mismatch: installed ${installed} vs declared ${declared}`);
