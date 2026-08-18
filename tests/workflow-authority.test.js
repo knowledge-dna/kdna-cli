@@ -103,9 +103,9 @@ test('workflow authority rejects hostile semantic mutations before remote execut
     ],
     ['missing timeout', { sources: replaceExact(base, ci, '    timeout-minutes: 20\n', '') }],
     [
-      'weakened Node 18 coordinate',
+      'weakened Node 22 coordinate',
       {
-        sources: replaceExact(base, ci, "node: ['18.20.8', '22.23.1']", "node: ['18', '22.23.1']"),
+        sources: replaceExact(base, ci, "node: ['22.23.1', '24.18.0']", "node: ['22', '24.18.0']"),
       },
     ],
     [

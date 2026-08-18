@@ -85,7 +85,7 @@
     "url": "https://github.com/aikdna/kdna-cli/issues"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "dependencies": {
     "@aikdna/kdna-core": "0.21.0",

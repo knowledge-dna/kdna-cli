@@ -15,7 +15,7 @@ const CORE_COMMIT = ['32aa3ff8e633291d4bb9e0', '1de5a70181c8415d93'].join('');
 const WORKFLOW_AUTHORITIES = Object.freeze([
   Object.freeze({
     path: '.github/workflows/ci.yml',
-    sha256: '793725e7f696a8d091f7632bd3245edcdec0b627de05366064238c467af2e9dd',
+    sha256: '96bfa479beffdedeab9ac752754c5d73b61c636aad11e3fab36d1423cdb2510c',
   }),
   Object.freeze({
     path: '.github/workflows/public-surface.yml',
@@ -118,13 +118,11 @@ function validateCi(source) {
   assertLiteralCount(source, 'timeout-minutes: 20', 1, label);
   assertLiteralCount(source, 'timeout-minutes: 10', 3, label);
   assertLiteralCount(source, `ref: ${CORE_COMMIT}`, 3, label);
-  assertLiteralCount(source, "node: ['18.20.8', '22.23.1']", 1, label);
+  assertLiteralCount(source, "node: ['22.23.1', '24.18.0']", 1, label);
   assertLiteralCount(source, "node-version: '22.23.1'", 3, label);
   assertLiteralCount(source, "node-version: '${{ matrix.node }}'", 1, label);
   assertLiteralCount(source, 'check-latest: false', 4, label);
-  assertLiteralCount(source, "if: matrix.node != '18.20.8'", 1, label);
-  assertLiteralCount(source, "if: matrix.node == '18.20.8'", 1, label);
-  assertLiteralCount(source, 'if:', 2, label);
+  assertLiteralCount(source, 'if:', 0, label);
   assertLiteralCount(source, 'run: node scripts/check-workflow-authority.js', 1, label);
   assertLiteralCount(source, 'run: node scripts/check-public-surface.mjs', 1, label);
   assertExactActions(
