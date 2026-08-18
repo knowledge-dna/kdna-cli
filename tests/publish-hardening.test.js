@@ -268,13 +268,13 @@ test('publish workflow has one canonical release-only path and publishes the ver
   const ci = fs.readFileSync(path.join(ROOT, '.github/workflows/ci.yml'), 'utf8');
   assert.doesNotMatch(ci, /npm install --global|npm --version|\bnpm run\b/);
   assert.ok((ci.match(/run-trusted-npm\.js ci/g) || []).length >= 4);
-  assert.equal((ci.match(/run: npm ci --ignore-scripts --no-audit --no-fund/g) || []).length, 3);
+  assert.equal((ci.match(/run: npm ci --ignore-scripts --no-audit --no-fund/g) || []).length, 2);
   assert.equal(
     (ci.match(/Install Core test dependencies with its lock-compatible client/g) || []).length,
     2,
   );
-  assert.match(ci, /Install dependencies for compatibility only/);
-  assert.match(ci, /if: matrix\.node == '18\.20\.8'/);
+  assert.doesNotMatch(ci, /Install dependencies for compatibility only/);
+  assert.doesNotMatch(ci, /if: matrix\.node == '18\.20\.8'/);
   assert.match(ci, /node scripts\/verify-core-candidate-tar\.js/);
   assert.match(ci, /node scripts\/check-public-surface\.mjs/);
   assert.doesNotMatch(ci, /npm ci --prefix \.cross-repo\/kdna/);

@@ -110,8 +110,8 @@ function cmdDoctor(args) {
     const major = parseInt(nodeVersion.slice(1).split('.')[0], 10);
     checks.push({
       name: 'Node.js',
-      status: major >= 18 ? 'ok' : 'fail',
-      detail: `${nodeVersion} (${major >= 18 ? '>=18 required' : 'requires >=18'})`,
+      status: major >= 22 ? 'ok' : 'fail',
+      detail: `${nodeVersion} (${major >= 22 ? '>=22 required' : 'requires >=22'})`,
     });
 
     // 2. @aikdna/kdna-core available
