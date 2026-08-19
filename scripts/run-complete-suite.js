@@ -23,6 +23,28 @@ const UNIT_TEST_FILES = Object.freeze([
   'tests/workflow-authority.test.js',
   'tests/runtime-candidate-binding.test.js',
   'tests/publish-hardening.test.js',
+  'tests/anti-monolithic.test.js',
+  'tests/archive-io-hardening.test.js',
+  'tests/asset-inheritance.test.js',
+  'tests/asset-store.test.js',
+  'tests/bundle-compatibility.test.js',
+  'tests/capsule-verify.test.js',
+  'tests/cluster.test.js',
+  'tests/common-utils.test.js',
+  'tests/context-budget.test.js',
+  'tests/current-global-cli.test.js',
+  'tests/dependencies.test.js',
+  'tests/dev-pack.test.js',
+  'tests/host-consent.test.js',
+  'tests/kdf-spec.test.js',
+  'tests/layer-isolation.test.js',
+  'tests/narrative-boundary.test.js',
+  'tests/rag-namespace.test.js',
+  'tests/remote-transport-policy.test.js',
+  'tests/single-format-regression.test.js',
+  'tests/trust-deprecation.test.js',
+  'tests/validator.test.js',
+  'tests/watermarking.test.js',
 ]);
 
 function runNode(args) {
@@ -58,6 +80,7 @@ function main() {
   if (mode === '--complete') {
     runNode(['scripts/check-public-surface.mjs']);
     runNode(['scripts/check-current-protocol-names.js']);
+    runNode(['scripts/check-test-inventory.js']);
   }
   if (mode !== '--smoke') runUnitSuite();
   if (mode !== '--unit') runSmokeSuite();
