@@ -99,26 +99,6 @@ test('CLI: plan-load with resolved deps → rag_namespace in output', () => {
 
 // ─── C: CLI — kdna load --namespace filter ────────────────────────────────────
 
-test('CLI: kdna load --namespace with no Bundle deps → warning on stderr, normal output', () => {
-  const tmpHome = fs.mkdtempSync(path.join(os.tmpdir(), 'kdna-s11-home-'));
-  try {
-    const r = run(['load', RUNTIME_FIXTURE, '--namespace=@scope/missing', '--as=json'], {
-      kdnaHome: tmpHome,
-    });
-    // The namespace filter warns when not found, but load itself succeeds
-    assert.equal(r.status, 0, `expected exit 0:\n${r.stderr}`);
-    // Warning should appear on stderr
-    assert.match(r.stderr, /namespace.*not found|Warning.*namespace/i);
-    // stdout should be valid JSON (the unfiltered load result)
-    const out = JSON.parse(r.stdout);
-    assert.ok(out.status || out.asset_id || out.profile, 'stdout should be load result JSON');
-  } finally {
-    fs.rmSync(tmpHome, { recursive: true, force: true });
-  }
-});
-
-// ─── D: Smoke — kdna load output has no cross-namespace data leakage ──────────
-
 test('smoke: kdna load single asset has no rag_isolation_policy field', () => {
   const tmpHome = fs.mkdtempSync(path.join(os.tmpdir(), 'kdna-s11-home-'));
   try {

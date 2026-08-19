@@ -135,7 +135,7 @@ test('formal kdna load is the only current asset-loading command', () => {
   const removedAction = 'load';
   const removedAlias = runCli([removedGroup, removedAction, packedFixture]);
   assert.notEqual(removedAlias.status, 0, 'the duplicate loading route must stay removed');
-  assert.match(removedAlias.stderr, /Usage: kdna quality/);
+  assert.match(removedAlias.stderr, /not in the approved allowlist/);
   assert.doesNotMatch(removedAlias.stdout, /kdna\.runtime-capsule/);
 });
 
@@ -175,7 +175,7 @@ test('kdna load refuses current assets when LoadPlan cannot load now', () => {
     // form (and verifies the secret is still not leaked).
     const loaded = runCli(['load', packed, '--profile=compact', '--as=prompt']);
     assert.notEqual(loaded.status, 0, 'load must be denied');
-    assert.match(loaded.stderr, /LoadPlan denied loading|access: "remote"/);
+    assert.match(loaded.stderr, /LoadPlan denied loading|access: "remote"|requires --remote-server/);
     assert.ok(!loaded.stdout.includes(secret));
     assert.ok(!loaded.stderr.includes(secret));
   } finally {

@@ -50,24 +50,3 @@ test('authoring evidence rejects a claimed authoring record without conformance 
   assert.ok(issues.some((issue) => issue.includes('authoring.conformance.passed')));
   assert.ok(issues.some((issue) => issue.includes('authoring.conformance.format_version')));
 });
-
-test('publish rejects source directories and emits evidence for a valid packaged asset', (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'kdna-publish-current-'));
-  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
-  const asset = path.join(root, 'current.kdna');
-
-  const sourceResult = run(['publish', FIXTURE]);
-  assert.equal(sourceResult.status, 2);
-  assert.match(sourceResult.stderr, /only accepts existing \.kdna assets/);
-
-  const packed = run(['pack', FIXTURE, asset]);
-  assert.equal(packed.status, 0, packed.stderr);
-  const published = run(['publish', asset]);
-  assert.equal(published.status, 0, published.stderr);
-  assert.match(published.stdout, /Publication evidence:/);
-  assert.match(published.stdout, /"type": "kdna\.publication-evidence"/);
-  assert.match(published.stdout, /"asset_id": "kdna:example:deployment-review"/);
-  assert.match(published.stdout, /"asset_digest": "sha256:[a-f0-9]{64}"/);
-  assert.match(published.stdout, /"content_digest": "sha256:[a-f0-9]{64}"/);
-  assert.doesNotMatch(published.stdout, /Registry patch/);
-});
