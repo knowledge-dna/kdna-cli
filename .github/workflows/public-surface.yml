@@ -20,5 +20,7 @@ jobs:
           check-latest: false
       - name: Enforce exact workflow authority
         run: node scripts/check-workflow-authority.js
+      - name: Enforce current protocol naming (no generation-style labels)
+        run: node scripts/check-current-protocol-names.js
       - name: Run public-surface check
         run: node scripts/check-public-surface.mjs

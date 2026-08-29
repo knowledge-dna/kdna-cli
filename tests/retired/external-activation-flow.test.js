@@ -108,7 +108,7 @@ test(
       });
       request.on('end', () => {
         const input = JSON.parse(raw);
-        if (request.url === '/api/v1/device-activations') {
+        if (request.url === '/api/account/device-activations') {
           activation = {
             id: 'act_fixture_01',
             challenge: 'challenge_fixture_01',
@@ -128,7 +128,7 @@ test(
           );
           return;
         }
-        if (request.url === `/api/v1/device-activations/${activation.id}/poll`) {
+        if (request.url === `/api/account/device-activations/${activation.id}/poll`) {
           const signature = Buffer.from(input.signature.slice('ed25519:'.length), 'base64url');
           const signed = { ...input };
           delete signed.signature;

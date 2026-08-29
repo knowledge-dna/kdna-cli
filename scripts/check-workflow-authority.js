@@ -19,7 +19,7 @@ const WORKFLOW_AUTHORITIES = Object.freeze([
   }),
   Object.freeze({
     path: '.github/workflows/public-surface.yml',
-    sha256: '082db09457d8b97f7ea8c758ed708093c4e91b8d8c11b80b219cd586cd766863',
+    sha256: 'c2e0aee6c769acc17f8072a1417d487d7f70c71d0f6cada9d11419a4e7179964',
   }),
   Object.freeze({
     path: '.github/workflows/codeql-js.yml',
@@ -155,6 +155,7 @@ function validatePublicSurface(source) {
   assertLiteralCount(source, "node-version: '22.23.1'", 1, label);
   assertLiteralCount(source, 'check-latest: false', 1, label);
   assertLiteralCount(source, 'run: node scripts/check-workflow-authority.js', 1, label);
+  assertLiteralCount(source, 'run: node scripts/check-current-protocol-names.js', 1, label);
   assertLiteralCount(source, 'run: node scripts/check-public-surface.mjs', 1, label);
   assertLiteralCount(source, 'if:', 0, label);
   assertExactActions(

@@ -86,17 +86,17 @@ test('legacy Activation accepts only its exact contractual endpoint', () => {
 test('account API base is a canonical origin or exact /api base', () => {
   assert.equal(
     accountApiEndpoint('https://accounts.example.test', 'device-activations'),
-    'https://accounts.example.test/api/v1/device-activations',
+    'https://accounts.example.test/api/account/device-activations',
   );
   assert.equal(
     accountApiEndpoint('http://[::1]:3002/api', 'entitlements/ent_1/sync'),
-    'http://[::1]:3002/api/v1/entitlements/ent_1/sync',
+    'http://[::1]:3002/api/account/entitlements/ent_1/sync',
   );
   for (const unsafe of [
     'http://localhost:3002',
     'http://accounts.example.test',
     'https://user:pass@accounts.example.test',
-    'https://accounts.example.test/api/v1',
+    'https://accounts.example.test/api/account',
     'https://accounts.example.test?tenant=secret',
     'https://accounts.example.test#fragment',
   ]) {
@@ -116,11 +116,16 @@ test('account API base is a canonical origin or exact /api base', () => {
     );
   }
   assert.equal(
-    assertAccountApiRequestUrl('https://accounts.example.test/api/v1/device-activations'),
-    'https://accounts.example.test/api/v1/device-activations',
+    assertAccountApiRequestUrl('https://accounts.example.test/api/account/device-activations'),
+    'https://accounts.example.test/api/account/device-activations',
   );
   assert.throws(
-    () => assertAccountApiRequestUrl('http://accounts.example.test/api/v1/device-activations'),
+    () => assertAccountApiRequestUrl('http://accounts.example.test/api/account/device-activations'),
+    Error,
+  );
+  const retiredAccountRoute = ['/api', 'v1', 'device-activations'].join('/');
+  assert.throws(
+    () => assertAccountApiRequestUrl(`https://accounts.example.test${retiredAccountRoute}`),
     Error,
   );
 });
@@ -153,7 +158,7 @@ test('account requests reject redirects and sterilize response bodies', async ()
   await listen(redirector);
   await listen(rejecting);
   try {
-    const redirectUrl = `http://127.0.0.1:${redirector.address().port}/api/v1/device-activations`;
+    const redirectUrl = `http://127.0.0.1:${redirector.address().port}/api/account/device-activations`;
     await assert.rejects(
       postAccountJson(redirectUrl, { activation_credential: 'request-secret' }),
       (error) => {
@@ -164,7 +169,7 @@ test('account requests reject redirects and sterilize response bodies', async ()
     );
     assert.equal(destinationRequests, 0);
 
-    const rejectUrl = `http://127.0.0.1:${rejecting.address().port}/api/v1/device-activations`;
+    const rejectUrl = `http://127.0.0.1:${rejecting.address().port}/api/account/device-activations`;
     await assert.rejects(
       postAccountJson(rejectUrl, { activation_credential: 'request-secret' }),
       (error) => {

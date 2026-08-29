@@ -43,6 +43,28 @@ test('naming gate rejects obsolete declarations and implementations', (t) => {
   assert.ok(issues.some((issue) => issue.rule === 'generation label before a KDNA-owned concept'));
 });
 
+test('naming gate rejects generation-style Account Service routes across repository text', (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'kdna-account-route-names-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(root, 'src'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'tests'), { recursive: true });
+  const retiredRoute = ['/api', 'v7', 'device-activations'].join('/');
+  fs.writeFileSync(path.join(root, 'src', 'transport.js'), `const route = '${retiredRoute}';\n`);
+  fs.writeFileSync(
+    path.join(root, 'tests', 'fixture.json'),
+    `${JSON.stringify({ retiredRoute })}\n`,
+  );
+  fs.writeFileSync(path.join(root, 'README.md'), `Call ${retiredRoute} for activation.\n`);
+
+  const issues = scanCurrentProtocolNames(root).filter(
+    (issue) => issue.rule === 'generation-style account API route',
+  );
+  assert.deepEqual(
+    issues.map((issue) => issue.file),
+    ['README.md', 'src/transport.js', 'tests/fixture.json'],
+  );
+});
+
 test('naming gate rejects unknown generation labels without a token allowlist', (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'kdna-protocol-generation-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
