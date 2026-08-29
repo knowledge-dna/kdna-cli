@@ -62,6 +62,7 @@ const FORBIDDEN_DECLARATIONS = Object.freeze([
   ['obsolete Runtime contract', joinedPattern('runtime', '-contract-', 'v1')],
   ['obsolete bundle format', joinedPattern('kdna-bundle', '-v1')],
   ['obsolete remote projection route', joinedPattern('/', 'v1', '/project')],
+  ['generation-style account API route', joinedPattern('/api/', 'v', '[0-9]+', '/')],
   ['obsolete capability fallback', joinedPattern('legacy', '_assumption')],
   ['duplicate loading route', /\bquality\s+load\b/],
   [

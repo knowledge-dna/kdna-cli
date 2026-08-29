@@ -167,7 +167,7 @@ function accountApiEndpoint(server, resource) {
   ) {
     throw new Error('account API resource is not canonical');
   }
-  return `${parsed.origin}/api/v1/${resource}`;
+  return `${parsed.origin}/api/account/${resource}`;
 }
 
 function assertAccountApiRequestUrl(value) {
@@ -185,9 +185,9 @@ function assertAccountApiRequestUrl(value) {
     parsed.search ||
     parsed.hash ||
     value !== `${parsed.origin}${parsed.pathname}` ||
-    !parsed.pathname.startsWith('/api/v1/') ||
+    !parsed.pathname.startsWith('/api/account/') ||
     parsed.pathname
-      .slice('/api/v1/'.length)
+      .slice('/api/account/'.length)
       .split('/')
       .some((segment) => segment === '' || segment === '.' || segment === '..')
   ) {
